@@ -1,4 +1,4 @@
-﻿name: JobSync CI
+name: JobSync CI
 
 on:
   push:
@@ -31,6 +31,7 @@ jobs:
       - name: Run Pytest
         run: pytest tests/ -v
         env:
+          PYTHONPATH: .
           GROQ_API_KEY: "test_key"
 
       - name: Check Alembic Migrations
