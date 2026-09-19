@@ -1,0 +1,179 @@
+{
+  "version": "1.0",
+  "description": "Evaluation cases for claim verification. Each case tests whether the verifier correctly classifies a resume claim against candidate evidence.",
+  "test_cases": [
+    {
+      "id": "TC001",
+      "category": "exact_match",
+      "evidence": "Built REST APIs using Spring Boot for an e-commerce platform.",
+      "claim": "Developed REST APIs using Spring Boot.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Direct match. Evidence explicitly mentions REST APIs and Spring Boot."
+    },
+    {
+      "id": "TC002",
+      "category": "semantic_match",
+      "evidence": "Built backend REST services using Spring Boot.",
+      "claim": "Developed REST APIs with Spring Boot.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Semantic equivalence. 'REST services' = 'REST APIs'."
+    },
+    {
+      "id": "TC003",
+      "category": "semantic_match",
+      "evidence": "Used PostgreSQL for data persistence in microservices.",
+      "claim": "Experienced with PostgreSQL database management.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Using PostgreSQL for persistence implies experience with it."
+    },
+    {
+      "id": "TC004",
+      "category": "paraphrase",
+      "evidence": "Created Docker containers for local development.",
+      "claim": "Containerized applications using Docker.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Creating containers = containerizing applications."
+    },
+    {
+      "id": "TC005",
+      "category": "partial_support",
+      "evidence": "Wrote unit tests using JUnit and Mockito.",
+      "claim": "Implemented unit testing with JUnit.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Evidence supports the claim, though it also mentions Mockito."
+    },
+    {
+      "id": "TC006",
+      "category": "normalization",
+      "evidence": "Developed frontend components using React.",
+      "claim": "Built responsive UIs with React.js.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "React = React.js. Frontend components = responsive UIs."
+    },
+    {
+      "id": "TC007",
+      "category": "inference",
+      "evidence": "Used Git for version control in team projects.",
+      "claim": "Proficient in Git version control.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Using Git in team projects implies proficiency."
+    },
+    {
+      "id": "TC008",
+      "category": "scope_inflation",
+      "evidence": "Spring Boot",
+      "claim": "Architected microservices using Spring Boot.",
+      "expected_verdict": "PARTIAL",
+      "notes": "Skill exists but evidence is just a skill name, not a project description. Scope is inflated."
+    },
+    {
+      "id": "TC009",
+      "category": "hallucination",
+      "evidence": "Used Docker during development.",
+      "claim": "Designed production Kubernetes infrastructure.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Docker ≠ Kubernetes. Different technologies."
+    },
+    {
+      "id": "TC010",
+      "category": "hallucination",
+      "evidence": "Java, Spring Boot",
+      "claim": "Expert in Kubernetes and Helm.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "No evidence for Kubernetes or Helm."
+    },
+    {
+      "id": "TC011",
+      "category": "fabricated_specificity",
+      "evidence": "Built a web application.",
+      "claim": "Developed microservices with Spring Cloud.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Evidence is generic. Claim adds specific technologies not mentioned."
+    },
+    {
+      "id": "TC012",
+      "category": "no_evidence",
+      "evidence": "",
+      "claim": "Deployed applications on AWS EC2 and S3.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "No evidence provided at all."
+    },
+    {
+      "id": "TC013",
+      "category": "scope_inflation",
+      "evidence": "Used MongoDB for a class project.",
+      "claim": "Managed production MongoDB clusters at scale.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Class project ≠ production clusters. Scope is massively inflated."
+    },
+    {
+      "id": "TC014",
+      "category": "experience_inflation",
+      "evidence": "Familiar with Python from coursework.",
+      "claim": "5 years of professional Python development.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Coursework familiarity ≠ 5 years professional experience."
+    },
+    {
+      "id": "TC015",
+      "category": "role_fabrication",
+      "evidence": "Contributed to an open-source Java library.",
+      "claim": "Led a team of 10 engineers.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Contributing ≠ leading a team. Role is fabricated."
+    },
+    {
+      "id": "TC016",
+      "category": "multi_evidence",
+      "evidence": "Built REST APIs using Spring Boot. Used PostgreSQL for persistence.",
+      "claim": "Developed full-stack applications with Spring Boot and PostgreSQL.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Multiple pieces of evidence together support the claim."
+    },
+    {
+      "id": "TC017",
+      "category": "generalization",
+      "evidence": "Created CI/CD pipelines using Jenkins.",
+      "claim": "Implemented CI/CD pipelines.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Jenkins is a specific tool. Claim generalizes to CI/CD pipelines."
+    },
+    {
+      "id": "TC018",
+      "category": "partial_support",
+      "evidence": "Used Linux for development.",
+      "claim": "Administered production Linux servers.",
+      "expected_verdict": "PARTIAL",
+      "notes": "Using Linux for dev ≠ administering production servers. Partial overlap."
+    },
+
+
+    {
+      "id": "TC019",
+      "category": "normalization",
+      "evidence": "Deployed applications using Kubernetes.",
+      "claim": "Implemented container orchestration with Kubernetes.",
+      "expected_verdict": "SUPPORTED",
+      "notes": "Kubernetes is a container orchestration tool. Evidence supports the claim."
+    },
+
+     {
+      "id": "TC020",
+      "category": "scope_inflation",
+      "evidence": "Managed a team of 5 developers.",
+      "claim": "Led cross-functional teams.",
+      "expected_verdict": "PARTIAL",
+      "notes": "Managing a team of developers is not the same as leading cross-functional teams. Partial support."
+     },
+
+    {
+      "id": "TC021",
+      "category": "scope_inflation",
+      "evidence": "Worked with REST APIs.",
+      "claim": "Architected scalable microservices.",
+      "expected_verdict": "UNSUPPORTED",
+      "notes": "Working with REST APIs does not imply experience in architecting scalable microservices. Scope is inflated."
+    }
+    
+  ]
+}

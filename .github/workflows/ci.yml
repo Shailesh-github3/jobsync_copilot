@@ -1,0 +1,42 @@
+﻿name: JobSync CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install dependencies
+        run: uv pip install --system -r requirements.txt
+
+      - name: Lint (optional)
+        run: echo "Linting step placeholder"
+
+      - name: Run Pytest
+        run: pytest tests/ -v
+        env:
+          GROQ_API_KEY: "test_key"
+
+      - name: Check Alembic Migrations
+        run: |
+          alembic upgrade head
+          alembic check
+
+      - name: Build Docker Image
+        run: docker compose build

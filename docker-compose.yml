@@ -1,0 +1,36 @@
+services:
+  api:
+    build: .
+    container_name: jobsync_api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////app/data/jobsync_copilot.db
+    env_file:
+      - .env
+    volumes:
+      - jobsync_data:/app/data
+      - jobsync_artifacts:/app/artifacts
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  worker:
+    build: .
+    container_name: jobsync_worker
+    environment:
+      - DATABASE_URL=sqlite:////app/data/jobsync_copilot.db
+    env_file:
+      - .env
+    volumes:
+      - jobsync_data:/app/data
+      - jobsync_artifacts:/app/artifacts
+    command: python -m app.worker
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  jobsync_data:
+    driver: local
+  jobsync_artifacts:
+    driver: local

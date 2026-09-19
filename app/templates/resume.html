@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ candidate.name }} - Verified Resume</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-accent: #2563eb;
+            --badge-bg: #ecfdf5;
+            --badge-border: #10b981;
+            --badge-text: #047857;
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --border-color: #e2e8f0;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --text-heading: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: a4 portrait;
+            margin: 1.5cm;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.5;
+            padding: 1.5rem 1rem;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 1.85rem;
+            color: #0f172a;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.65rem;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            background-color: #ecfdf5;
+            border: 1px solid #10b981;
+            color: #047857;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .section {
+            margin-bottom: 1.35rem;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.35rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .summary-text {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .bullets-list {
+            padding-left: 1.25rem;
+            margin: 0;
+        }
+
+        .bullets-list li {
+            margin-bottom: 0.45rem;
+            font-size: 0.925rem;
+            color: #334155;
+            line-height: 1.45;
+        }
+
+        .skills-grid {
+            margin-top: 0.25rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            margin-right: 0.35rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-footer {
+            margin-top: 1.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <div class="header-main">
+                <h1>{{ candidate.name }}</h1>
+                <div class="contact-info">
+                    {{ candidate.email }}{% if candidate.phone %} | {{ candidate.phone }}{% endif %}
+                </div>
+            </div>
+            <div>
+                <div class="verified-badge">
+                    [100% VERIFIED BY JOBSYNC COPILOT]
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="summary-text">{{ resume.tailored_summary }}</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Accomplishments & Experience</h2>
+            <ul class="bullets-list">
+                {% for bullet in bullets %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Verified Technical Skills</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer class="pipeline-footer">
+            <span>Pipeline Audit ID: {{ resume.pipeline_id or 'PIPE-2026-001' }}</span>
+            <span>Deterministic Truth Gate: PASSED</span>
+        </footer>
+    </div>
+</body>
+</html>
