@@ -28,16 +28,16 @@ jobs:
       - name: Lint (optional)
         run: echo "Linting step placeholder"
 
+      - name: Check Alembic Migrations
+        run: |
+          alembic upgrade head
+          alembic check
+
       - name: Run Pytest
         run: pytest tests/ -v
         env:
           PYTHONPATH: .
           GROQ_API_KEY: "test_key"
-
-      - name: Check Alembic Migrations
-        run: |
-          alembic upgrade head
-          alembic check
 
       - name: Build Docker Image
         run: docker compose build

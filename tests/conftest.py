@@ -131,6 +131,7 @@ def client(db_session, monkeypatch):
     app.dependency_overrides[get_db] = override_get_db
     monkeypatch.setattr(db_module, "SessionLocal", TestingSessionLocal)
     monkeypatch.setattr(bg_module, "SessionLocal", TestingSessionLocal)
+    monkeypatch.setattr(db_module, "engine", engine)
 
     with TestClient(app) as test_client:
         yield test_client
